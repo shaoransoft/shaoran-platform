@@ -28,7 +28,7 @@ ex. URL address for call: http://localhost/shaoran-platform/api/get/demo/index
 WTH!
 edit Controllers/api/get/DemoController.php remove or comment code
 
-+ self::$model->userAuth->ApiActive(); +
+self::$model->userAuth->ApiActive();
 
 because not have session login and refresh again...
 -- responsed --
