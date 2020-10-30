@@ -1,0 +1,12 @@
+<div class="container-fluid pt-3">
+ <div class="jumbotron">
+ <h1 class="display-4">Shaoran Platform 5</h1>
+ <p class="lead">Easy for development</p>
+ <hr class="my-4">
+ <p><i class="far fa-check-circle text-success"></i> Shaoran DbHelper v.3.0</p>
+ <p><i class="far fa-check-circle text-success"></i> Shaoran File Manager v.1.0</p>
+ <p><i class="far fa-check-circle text-success"></i> BladeOne v.3.47.3</p>
+ <p><i class="far fa-check-circle text-success"></i> Bootstrap v.4.5 + Customize Coder Theme</p>
+ <p><i class="far fa-check-circle text-success"></i> Font Awesome v.5.0</p>
+ </div>
+</div>

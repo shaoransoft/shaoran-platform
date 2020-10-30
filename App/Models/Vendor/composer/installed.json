@@ -1,0 +1,174 @@
+{
+    "packages": [
+        {
+            "name": "chriskonnertz/string-calc",
+            "version": "v1.0.12",
+            "version_normalized": "1.0.12.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chriskonnertz/string-calc.git",
+                "reference": "bddc5aaea1c1c0a270e6c96f3719c48afa6cb7f0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chriskonnertz/string-calc/zipball/bddc5aaea1c1c0a270e6c96f3719c48afa6cb7f0",
+                "reference": "bddc5aaea1c1c0a270e6c96f3719c48afa6cb7f0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "time": "2019-09-03T14:09:20+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "ChrisKonnertz\\StringCalc": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Konnertz"
+                }
+            ],
+            "description": "StringCalc is a PHP calculator library for mathematical terms (expressions) passed as strings.",
+            "keywords": [
+                "calculation",
+                "expression",
+                "math",
+                "parser",
+                "string calc",
+                "string-calc",
+                "stringcalc",
+                "term"
+            ],
+            "support": {
+                "issues": "https://github.com/chriskonnertz/string-calc/issues",
+                "source": "https://github.com/chriskonnertz/string-calc/tree/v1.0.12"
+            },
+            "install-path": "../chriskonnertz/string-calc"
+        },
+        {
+            "name": "eftec/bladeone",
+            "version": "3.47.3",
+            "version_normalized": "3.47.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/EFTEC/BladeOne.git",
+                "reference": "6829b328505bbb0ad4aad8b87b9eb12874e79697"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/EFTEC/BladeOne/zipball/6829b328505bbb0ad4aad8b87b9eb12874e79697",
+                "reference": "6829b328505bbb0ad4aad8b87b9eb12874e79697",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.16.1",
+                "phpunit/phpunit": "^5.7",
+                "squizlabs/php_codesniffer": "^3.5.4"
+            },
+            "suggest": {
+                "eftec/bladeonehtml": "Extension to create forms",
+                "ext-mbstring": "This extension is used if it's active"
+            },
+            "time": "2020-10-16T22:36:05+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "eftec\\bladeone\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jorge Patricio Castro Castillo",
+                    "email": "jcastro@eftec.cl"
+                }
+            ],
+            "description": "The standalone version Blade Template Engine from Laravel in a single php file",
+            "homepage": "https://github.com/EFTEC/BladeOne",
+            "keywords": [
+                "blade",
+                "php",
+                "template",
+                "templating",
+                "view"
+            ],
+            "support": {
+                "issues": "https://github.com/EFTEC/BladeOne/issues",
+                "source": "https://github.com/EFTEC/BladeOne/tree/3.47.3"
+            },
+            "install-path": "../eftec/bladeone"
+        },
+        {
+            "name": "eftec/bladeonehtml",
+            "version": "1.6.1",
+            "version_normalized": "1.6.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/EFTEC/BladeOneHtml.git",
+                "reference": "c7b41a45acf6bfb4898467f583a7465ef5174bdf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/EFTEC/BladeOneHtml/zipball/c7b41a45acf6bfb4898467f583a7465ef5174bdf",
+                "reference": "c7b41a45acf6bfb4898467f583a7465ef5174bdf",
+                "shasum": ""
+            },
+            "require": {
+                "eftec/bladeone": "^3.47",
+                "ext-json": "*",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7"
+            },
+            "time": "2020-08-31T12:55:34+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "eftec\\bladeonehtml\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jorge Patricio Castro Castillo",
+                    "email": "jcastro@eftec.cl"
+                }
+            ],
+            "description": "The standalone version Blade Template Engine from Laravel in a single php file",
+            "homepage": "https://github.com/EFTEC/BladeOneHtml",
+            "keywords": [
+                "blade",
+                "php",
+                "template",
+                "templating",
+                "view"
+            ],
+            "support": {
+                "issues": "https://github.com/EFTEC/BladeOneHtml/issues",
+                "source": "https://github.com/EFTEC/BladeOneHtml/tree/1.6.1"
+            },
+            "install-path": "../eftec/bladeonehtml"
+        }
+    ],
+    "dev": true
+}

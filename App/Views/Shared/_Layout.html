@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="description" content="{{ $ViewPage['Description'] }}">
+    <meta name="keywords" content="{{ $ViewPage['Keywords'] }}">
+    <meta name="copyright" content="{{ $System['AssemblyInfo']['Copyright'] }}">
+    <meta name="author" content="{{ $System['AssemblyInfo']['Author'] }}">
+    <title>{{ $ViewPage['Title'] }}</title>
+    <link type="image/x-icon" rel="shortcut icon" href="{{ $System['AssemblyInfo']['BaseURL'] }}/favicon.ico">
+    <link type="image/png" rel="icon" href="{{ $System['AssemblyInfo']['BaseURL'] }}/favicon.png">
+    {!! $RenderBundle !!}
+  </head>
+  <body>
+    <div class="overlay" id="overlay"></div>
+    <div class="wrap">
+      <div class="header">
+        {!! $RenderNav !!}
+      </div>
+      <div class="content">
+        {!! $RenderBody !!}
+      </div>
+      <div class="footer">
+        {!! $RenderFooter !!}
+      </div>
+    </div>
+  </body>
+</html>
