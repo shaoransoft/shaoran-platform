@@ -2,7 +2,7 @@
 /* Shaoran web application framework 5 */
 define('Db', [
   'Default' => [
-    'Dsn' => 'mysql:host=localhost;dbname=srplatform;charset=utf8',
+    'Dsn' => 'mysql:host=localhost;dbname=YOUR_DATABASE;charset=utf8',
     'Username' => 'root',
     'Password' => '',
   ],

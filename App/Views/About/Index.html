@@ -1,0 +1,26 @@
+<div class="container-fluid pt-3">
+  <div class="jumbotron">
+    <h1 class="display-4">About</h1>
+    <p class="lead">Shaoran Platform development from Model-View-Controller (MVC) pattern</p>
+    <ul>
+      <li>.\App\Models -> Model directory</li>
+      <li>.\App\Controllers -> Controller directory</li>
+      <li>.\App\Views -> View directory</li>
+    </ul>
+    <b>-- Easy! --</b>
+    <hr />
+    <p>You can create API service in .\App\Controllers\api has get / post / put / delete method request with $_POST or $_GET and response is json syntax.</p>
+    <p>ex. URL address for call: http://localhost/shaoran-platform/api/get/demo/index</p>
+    <p>-- responsed --</p>
+    <code>{"status":403,"msg":"forbidden"}</code>
+    <b>WTH!</b><br />
+    <p>edit Controllers/api/get/DemoController.php remove or comment code</p>
+    <code>self::$model->userAuth->ApiActive();</code>
+    <p>because not have session login and refresh again...</p>
+    <p>-- responsed --</p>
+    <code>{"status":200,"msg":"success"}</code><br />
+    <b>-- WOW! Easy but not security LOL --</b>
+    <p>This framework is also a prototype. you can join develop it even further!</p>
+    <p>Thank you.</p>
+  </div>
+</div>
