@@ -10,9 +10,8 @@ Frameworks & resources for help you.
 - Font Awesome v.5.0
 
 Hello! Welcome to the first time
-1. config RewriteBase in .\.htaccess to your directory project (ex. /shaoran-platform)
-2. config AssemblyBaseURL in .\App\WebConfig.php to your access with url address (ex. http://localhost/shaoran-platform)
-3. dev time!
+1. config AssemblyBaseURL in .\App\WebConfig.php to your access with url address (ex. http://localhost/shaoran-platform)
+2. dev time!
 
 Shaoran Platform development from Model-View-Controller (MVC) pattern
 .\App\Models -> Model directory
