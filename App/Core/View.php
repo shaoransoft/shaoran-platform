@@ -27,6 +27,8 @@ class View
     'datepicker/locales/bootstrap-datepicker.th.js',
     'dropzone/dropzone.min.js',
     'dropzone/component.fileupload.js',
+    'bootbox/bootbox.min.js',
+    'bootbox/bootbox.locales.min.js',
     'system/script.main.js',
   ];
 
