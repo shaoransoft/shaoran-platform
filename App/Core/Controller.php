@@ -8,7 +8,6 @@ class Controller
 {
   protected static $model;
   protected static $view;
-  protected static $session;
 
   function __construct()
   {
@@ -18,12 +17,13 @@ class Controller
 
   protected function View($viewData = [], $viewPage = [], $action = null, $controller = null)
   {
-    $session = self::$model->userAuth->Get();
-    if (!empty(self::$session))
-      $session['Info'] = self::$session;
-    $viewData = array_merge($viewData != null ? $viewData : [], [
-      'Session' => $session,
-    ]);
+    $session = self::$model->userAuth->Get('UID');
+    if (!empty($session))
+    {
+      $viewData = array_merge($viewData != null ? $viewData : [], [
+        'Session' => $session,
+      ]);
+    }
 
     $dataSet = [
       'ViewPage' => $this->ViewPage($viewPage),
@@ -70,8 +70,6 @@ class Controller
   {
     $controller = strtolower($this->System()['Controller']);
     $action = strtolower($this->System()['Action']);
-    if ($controller !== 'account')
-      session_destroy();
     return [
       'P_HOME' => $controller === 'home',
     ];

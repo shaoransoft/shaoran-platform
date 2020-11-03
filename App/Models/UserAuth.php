@@ -1,27 +1,33 @@
 <?php
 /* Shaoran web application framework 5 */
 class UserAuth {
-  private static $session = null;
-  private static $param = 'USER_SIGN_IN';
+  private static $parent = 'AUTH';
 
-  function __construct() {
-    if (isset($_SESSION[self::$param])) self::$session = $_SESSION[self::$param];
+  public function Get($param = false) {
+    return isset($_SESSION[self::$parent]) ? ($param) ? $_SESSION[self::$parent][$param] : $_SESSION[self::$parent] : null;
   }
 
-  public function Get() {
-    return self::$session;
+  public function Set($param = false, $value = null) {
+    if (is_array($param))
+      $_SESSION[self::$parent] = $param;
+    else
+      $_SESSION[self::$parent][$param] = $value;
   }
 
-  public function Set($session = null) {
-    $_SESSION[self::$param] = $session;
+  public function IsActive() {
+    return isset($_SESSION[self::$parent]);
   }
 
   public function Active() {
-    if (!isset(self::$session)) View::Redirect('SignIn', 'Account');
+    if (!$this->IsActive()) View::Redirect('signin', 'auth');
   }
 
   public function ApiActive() {
-    if (!isset(self::$session)) API::Response(403);
+    if (!$this->IsActive()) API::Response(403);
+  }
+
+  public function Forget() {
+    session_destroy();
   }
 }
 ?>
