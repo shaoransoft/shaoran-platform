@@ -71,8 +71,8 @@ class Route
 
     if (!isset($url[1]))
       API::Response(400);
-    $method = ucfirst($url[1]);
-    if (!file_exists('App/Controllers/Api/'.$method))
+    $method = strtolower($url[1]);
+    if (!file_exists('App/Controllers/api/'.$method))
       API::Response(400);
     $this->method = $method;
     unset($url[1]);
@@ -80,11 +80,11 @@ class Route
     if (!isset($url[2]))
       API::Response(400);
     $controller = ucfirst($url[2]);
-    if (!file_exists('App/Controllers/Api/'.$this->method.'/'.$controller.'Controller.php'))
+    if (!file_exists('App/Controllers/api/'.$this->method.'/'.$controller.'Controller.php'))
       API::Response(404);
     $this->controller = $controller;
     unset($url[2]);
-    require_once 'App/Controllers/Api/'.$this->method.'/'.$this->controller.'Controller.php';
+    require_once 'App/Controllers/api/'.$this->method.'/'.$this->controller.'Controller.php';
     $this->controller = new $this->controller;
 
     if (isset($url[3]))
