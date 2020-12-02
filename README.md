@@ -1,6 +1,6 @@
 # shaoran-platform
 Shaoran Platform is a web application framework for PHP
-Version 5.1 (build 10.2020)
+Version 5.2 (build 10.2020)
 
 Frameworks & resources for help you.
 - Shaoran DbHelper v.3.0
