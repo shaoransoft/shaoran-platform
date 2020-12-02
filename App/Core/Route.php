@@ -47,6 +47,7 @@ class Route
       $this->controller = $controller;
       unset($url[0]);
     }
+    else $this->controller = $this->controller.'Controller';
     require_once 'App/Controllers/'.$this->controller.'.php';
     $this->controller = new $this->controller;
 
