@@ -7,7 +7,7 @@ require_once 'App/Models/API.php';
 class Route
 {
   protected $method = RouteApiDefault['Method'];
-  protected $controller = RouteDefault['Controller'];
+  protected $controller = RouteDefault['Controller'].'Controller';
   protected $action = RouteDefault['Action'];
   protected $params = [];
 
@@ -44,10 +44,10 @@ class Route
     $controller = ucfirst($url[0]);
     if (file_exists('App/Controllers/'.$controller.'Controller.php'))
     {
-      $this->controller = $controller;
+      $this->controller = $controller.'Controller';
       unset($url[0]);
     }
-    require_once 'App/Controllers/'.$this->controller.'Controller.php';
+    require_once 'App/Controllers/'.$this->controller.'.php';
     $this->controller = new $this->controller;
 
     if (isset($url[1]))
@@ -82,9 +82,9 @@ class Route
     $controller = ucfirst($url[2]);
     if (!file_exists('App/Controllers/api/'.$this->method.'/'.$controller.'Controller.php'))
       API::Response(404);
-    $this->controller = $controller;
+    $this->controller = $controller.'Controller';
     unset($url[2]);
-    require_once 'App/Controllers/api/'.$this->method.'/'.$this->controller.'Controller.php';
+    require_once 'App/Controllers/api/'.$this->method.'/'.$this->controller.'.php';
     $this->controller = new $this->controller;
 
     if (isset($url[3]))

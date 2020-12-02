@@ -1,5 +1,5 @@
 <?php
-class User extends Model
+class UserEntity extends Model
 {
   function __construct()
   {
