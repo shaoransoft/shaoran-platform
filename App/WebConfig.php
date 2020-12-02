@@ -28,7 +28,7 @@ define('RouteDefault', [
   'Action' => 'Index'
 ]);
 define('RouteApiDefault', [
-  'Method' => 'Get',
+  'Method' => 'GET',
   'Action' => 'Index'
 ]);
 ?>

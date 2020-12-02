@@ -7,7 +7,7 @@ require_once 'App/Models/API.php';
 class Route
 {
   protected $method = RouteApiDefault['Method'];
-  protected $controller = RouteDefault['Controller'].'Controller';
+  protected $controller = RouteDefault['Controller'];
   protected $action = RouteDefault['Action'];
   protected $params = [];
 
@@ -41,10 +41,10 @@ class Route
 
   private function RouteController($url = null)
   {
-    $controller = ucfirst($url[0]);
-    if (file_exists('App/Controllers/'.$controller.'Controller.php'))
+    $controller = ucfirst($url[0]).'Controller';
+    if (file_exists('App/Controllers/'.$controller.'.php'))
     {
-      $this->controller = $controller.'Controller';
+      $this->controller = $controller;
       unset($url[0]);
     }
     require_once 'App/Controllers/'.$this->controller.'.php';
@@ -71,32 +71,31 @@ class Route
 
     if (!isset($url[1]))
       API::Response(400);
-    $method = strtolower($url[1]);
-    if (!file_exists('App/Controllers/api/'.$method))
+    $method = strtoupper($url[1]);
+    if (!in_array($method, ['GET','POST','PUT','DELETE']))
       API::Response(400);
     $this->method = $method;
     unset($url[1]);
 
     if (!isset($url[2]))
       API::Response(400);
-    $controller = ucfirst($url[2]);
-    if (!file_exists('App/Controllers/api/'.$this->method.'/'.$controller.'Controller.php'))
+    $controller = ucfirst($url[2]).'Api';
+    if (!file_exists('App/Controllers/api/'.$controller.'.php'))
       API::Response(404);
-    $this->controller = $controller.'Controller';
+    $this->controller = $controller;
     unset($url[2]);
-    require_once 'App/Controllers/api/'.$this->method.'/'.$this->controller.'.php';
+    require_once 'App/Controllers/api/'.$this->controller.'.php';
     $this->controller = new $this->controller;
 
+
+    $action = $this->method.'_'.(isset($url[3]) ? ucfirst($url[3]) : $this->action);
+    if (!method_exists($this->controller, $action))
+      API::Response(400);
+    $this->action = $action;
     if (isset($url[3]))
-    {
-      $action = ucfirst($url[3]);
-      if (!method_exists($this->controller, $action))
-        API::Response(400);
-      $this->action = $action;
       unset($url[3]);
-      if (!empty($url))
-        array_push($this->params, array_values($url));
-    }
+    if (!empty($url))
+      array_push($this->params, array_values($url));
   }
 }
 ?>
