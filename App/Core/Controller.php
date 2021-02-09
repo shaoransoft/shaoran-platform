@@ -17,10 +17,12 @@ class Controller
 
   protected function View($viewData = [], $viewPage = [], $action = null, $controller = null)
   {
+    if ($viewData == null)
+      $viewData = [];
     $session = self::$model->userAuth->Get('UID');
     if (!empty($session))
     {
-      $viewData = array_merge($viewData != null ? $viewData : [], [
+      $viewData = array_merge($viewData, [
         'Session' => $session,
       ]);
     }
