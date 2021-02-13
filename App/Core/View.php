@@ -41,7 +41,16 @@ class View
         $controller = ucfirst($url[0]);
     }
     if ($action == null)
-      $action = empty($url[1]) ? RouteDefault['Action'] : ucfirst($url[1]);
+    {
+      $action = RouteDefault['Action'];
+      if (!empty($url[1]) && file_exists('App/Views/'.$controller.'/'.ucfirst($url[1]).'.html'))
+        $action = ucfirst($url[1]);
+    }
+    else
+    {
+      if (!file_exists('App/Views/'.$controller.'/'.ucfirst($action).'.html'))
+        $action = RouteDefault['Action'];
+    }
     $data['RenderBundle'] = $this->RenderBundle();
     return self::$blade->run("{$controller}/{$action}.html", $data);
   }
