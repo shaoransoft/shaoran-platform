@@ -1,8 +1,8 @@
 <?php
-/* Shaoran DbHelper framework 3.1 */
+/* Shaoran DbHelper framework 3.2 */
 class DbHelper {
   private static $conn;
-  private $iconv = ['Enable' => false, 'InChar' => 'UTF-8', 'OutChar' => 'UTF-8'];
+  private $iconv = ['Enable' => false, 'InChar' => 'TIS-620', 'OutChar' => 'UTF-8'];
   private $method = 0;
   private $entity = null;
   private $attr = null;
@@ -58,7 +58,7 @@ class DbHelper {
         $i = 0;
         foreach ($attr as $k => $v) {
           if (isset($v)) {
-            if ($i < count($attr) && $i > 0) $attrs .= ', ';
+            if ($i < count($attr) && $i > 0) $this->attr .= ', ';
             $this->attr .= "{$k}=?";
             $this->params[] = $v;
             $i++;
@@ -101,10 +101,10 @@ class DbHelper {
     if ($attr != null && is_array($attr)) {
       $i = 0;
       foreach ($attr as $k => $v) {
-        if (is_array($v)) {
+        if ($v != null && is_array($v)) {
           if (count($v) > 0) {
             foreach ($v as $subK => $subV) {
-              if (isset($subV)) {
+              if ($subV != null && isset($subV)) {
                 switch (strtoupper($subK)) {
                   case 'LIKE':
                     if ($i < 1) $cmd .= '(';
@@ -113,14 +113,34 @@ class DbHelper {
                     if ($i == $paramNotNull['LIKE'] - 1)
                       $cmd .= ')';
                     break;
+                  case 'NOTLIKE':
+                    if ($i < 1) $cmd .= '(';
+                    if ($i > 0) $cmd .= ' AND ';
+                    $cmd .= "{$k} NOT LIKE ?";
+                    if ($i == $paramNotNull['NOTLIKE'] - 1)
+                      $cmd .= ')';
+                    break;
                   case 'ISNOT':
                     if ($i > 0) $cmd .= ' AND ';
                     $cmd .= "{$k}!=?";
                     break;
                   case 'IN':
+                    if ($i > 0) $cmd .= ' AND ';
+                    $cmd .= "{$k} IN (";
+                    if (is_array($subV)) {
+                      $j = 0;
+                      foreach ($subV as $subVal) {
+                        if ($j < count($subV) && $j > 0) $cmd .= ',';
+                        $cmd .= '?';
+                        $j++;
+                      }
+                    }
+                    else $cmd .= '?';
+                    $cmd .= ')';
+                    break;
                   case 'NOTIN':
                     if ($i > 0) $cmd .= ' AND ';
-                    $cmd .= "{$k} ".strtoupper($subK)."(";
+                    $cmd .= "{$k} NOT IN (";
                     if (is_array($subV)) {
                       $j = 0;
                       foreach ($subV as $subVal) {
@@ -239,9 +259,9 @@ class DbHelper {
         $result = [];
         if ($this->cmd != null) {
           $query = $this->ExecuteCmd();
-          if ($query != null && $query->rowCount() > 0) {
+          if ($query != null && $query->rowCount() < 0) {
             while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
-              $result[] = $this->CharConvert($row, true);
+              $result[] = $this->CharConvert($row);
             }
           }
         }
@@ -259,18 +279,18 @@ class DbHelper {
   }
 
   private function ParamNotNull($attr = null) {
-    $result = ['LIKE' => 0, 'ISNOT' => 0, 'IN' => 0, 'NOTIN' => 0, 'MORE' => 0, 'LESS' => 0, 'IS' => 0];
+    $result = ['LIKE' => 0, 'NOTLIKE' => 0, 'ISNOT' => 0, 'IN' => 0, 'NOTIN' => 0, 'MORE' => 0, 'LESS' => 0, 'IS' => 0];
     if ($attr != null && is_array($attr)) {
       foreach ($attr as $k => $v) {
-        if (is_array($v)) {
+        if ($v != null && is_array($v)) {
           if (count($v) > 0) {
             foreach ($v as $subK => $subV) {
-              if (isset($subV)) $result[strtoupper($subK)]++;
+              if ($subV != null && isset($subV)) $result[strtoupper($subK)]++;
             }
           }
         }
         else
-          if (isset($v)) $result['IS']++;
+          if ($v != null && isset($v)) $result['IS']++;
       }
     }
     return $result;
@@ -312,10 +332,9 @@ class DbHelper {
 
   private function ExecuteCmd() {
     $query = null;
-    $params = $this->method < 1 ? $this->CharConvert($this->params) : $this->params;
     try {
       $query = self::$conn->prepare($this->cmd);
-      $query->execute($params);
+      $query->execute($this->CharConvert($this->params, true));
     }
     catch (exception $e) {
       echo $e->getMessage();
@@ -326,13 +345,14 @@ class DbHelper {
 
   private function CharConvert($data = [], $revert = false) {
     if ($data != null && is_array($data)) {
-      if (!$this->iconv['Enable']) {
+      if ($this->iconv['Enable']) {
         $inChar = $revert ? $this->iconv['OutChar'] : $this->iconv['InChar'];
         $outChar = $revert ? $this->iconv['InChar'] : $this->iconv['OutChar'];
-        return array_combine(array_keys($data), array_map(function ($v) use ($inChar, $outChar) {
-          return iconv($inChar, $outChar, $v);
-        }, $data));
+        $res = [];
+        foreach ($data as $a => $v) { $res[$a] = @iconv($inChar, $outChar, $v); }
+        return $res;
       }
+      return $data;
     }
     return $data;
   }
