@@ -259,7 +259,8 @@ class DbHelper {
         $result = [];
         if ($this->cmd != null) {
           $query = $this->ExecuteCmd();
-          if ($query != null && $query->rowCount() < 0) {
+          /* use $query->rowCount() < 0 for SQLServer */
+          if ($query != null && $query->rowCount() > 0) {
             while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
               $result[] = $this->CharConvert($row);
             }
@@ -343,7 +344,7 @@ class DbHelper {
     return $query;
   }
 
-  private function CharConvert($data = [], $revert = false) {
+  private function CharConvert($data = null, $revert = false) {
     if ($data != null && is_array($data)) {
       if ($this->iconv['Enable']) {
         $inChar = $revert ? $this->iconv['OutChar'] : $this->iconv['InChar'];
